@@ -1,0 +1,32 @@
+CREATE TABLE usuario (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefone VARCHAR(20),
+    senha VARCHAR(255) NOT NULL,
+    tipo VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE sala (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    capacidade INT NOT NULL
+);
+
+CREATE TABLE reserva (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id BIGINT NOT NULL,
+    sala_id BIGINT NOT NULL,
+    data_reserva TIMESTAMP NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+    FOREIGN KEY (sala_id) REFERENCES sala(id)
+);
+
+CREATE TABLE bloqueio (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    sala_id BIGINT NOT NULL,
+    inicio TIMESTAMP NOT NULL,
+    fim TIMESTAMP NOT NULL,
+    FOREIGN KEY (sala_id) REFERENCES sala(id)
+);
+
